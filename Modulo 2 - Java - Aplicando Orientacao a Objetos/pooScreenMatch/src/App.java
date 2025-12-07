@@ -1,11 +1,13 @@
+import br.com.alura.screenmatch.model.Filme;
+
 public class App {
     public static void main(String[] args) throws Exception {
 
         Filme filme = new Filme();
 
-        filme.nome = "O hobbit";
-        filme.anoLancamento = 2021;
-        filme.duracaoEmMin = 180;
+        filme.setNome("O hobbit");
+        filme.setAnoLancamento(2021);
+        filme.setDuracaoEmMin(180);
 
         filme.exibeFichaTecnicia();
 
@@ -13,8 +15,10 @@ public class App {
         filme.avalia(5);
         filme.avalia(7);
 
-        System.out.println(filme.somaAvaliacao);
-        System.out.println(filme.totalAvaliacao);
+        System.out.println(filme.getTotalAvaliacao());
+
+        // System.out.println(filme.somaAvaliacao);
+        // System.out.println(filme.totalAvaliacao);
         System.out.println(filme.pegaMedia());
 
     }
