@@ -1,6 +1,9 @@
+import br.com.alura.screenmatch.model.Episodio;
 import br.com.alura.screenmatch.model.Filme;
 import br.com.alura.screenmatch.model.Serie;
 import br.com.alura.screenmatch.utils.CalculaTempo;
+import br.com.alura.screenmatch.utils.Classificar;
+import br.com.alura.screenmatch.utils.FiltroRecomendacao;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -43,6 +46,17 @@ public class App {
         // abaixo conceito de sobrecarga de metodos
         calculaTempo.inclui(serie);
         System.out.println(calculaTempo.getTempoTotal());
+
+        // FILTRANDO FILME
+        FiltroRecomendacao filtroRecomendacao = new FiltroRecomendacao();
+        filtroRecomendacao.filtrar(filme1);
+
+        // FILTRANDO UM EP
+        Episodio episodio = new Episodio();
+        episodio.setNumero(1);
+        episodio.setSerie(serie);
+        episodio.setTotalVisualizacoes(100);
+        filtroRecomendacao.filtrar(episodio);
 
     }
 }
