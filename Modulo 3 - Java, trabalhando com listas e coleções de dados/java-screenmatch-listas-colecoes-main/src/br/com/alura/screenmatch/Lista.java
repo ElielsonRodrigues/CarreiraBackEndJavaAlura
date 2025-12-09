@@ -1,6 +1,7 @@
 package br.com.alura.screenmatch;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import br.com.alura.screenmatch.modelos.Filme;
 import br.com.alura.screenmatch.modelos.Serie;
@@ -41,7 +42,6 @@ public class Lista {
             //Filme filme = (Filme) item; // NECESSARIO PARA NÃO GERAR UM ERRO DE COMPLICAÇÃO
             //System.out.println("Classificação: " + filme.getClassificacao());    
         }
-        
 
         // USANDO LAMBDA 1
         /* 
@@ -58,6 +58,28 @@ public class Lista {
         //lista.forEach(System.out::println);
 
 
+        ArrayList<String> buscaPorArtista = new ArrayList<>();
+        buscaPorArtista.add("Adam Sandler");
+        buscaPorArtista.add("Paulo");
+        buscaPorArtista.add("Jacqueline");
+        System.out.println("Lista Atual : " + buscaPorArtista);
 
+        Collections.sort(buscaPorArtista); // ORDENANDO A LISTA
+        System.out.println("Lista Ordenada : " + buscaPorArtista);
+
+        
+        System.out.println("Lista Titulos : " + buscaPorArtista);
+        Collections.sort(lista);
+        System.out.println("Lista Titulos Ordenada: " + lista);
+
+        /* 
+        Filme filme1 = new Filme("Avatar", 2009);
+        Filme filme2 = new Filme("Avatar", 2009);
+        if (filme1 == filme2) {
+            System.out.println("Iguais");
+        } else {
+            System.out.println("Diferentes");
+        }
+        */
     }
 }
