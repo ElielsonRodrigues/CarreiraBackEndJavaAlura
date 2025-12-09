@@ -31,15 +31,32 @@ public class Lista {
         lista.add(outroFilme);
         lista.add(filmeDoPaulo);
         lista.add(lost);
-
+         
         for (Titulo item : lista) {
-            
             System.out.println(item.getNome());
 
-            Filme filme = (Filme) item; // NECESSARIO PARA NÃO GERAR UM ERRO DE COMPLICAÇÃO
-            System.out.println("Classificação: " + filme.getClassificacao());
-
+            if (item instanceof Filme filme) { // POSSO DECLARAR DIRETAMENTE AKI
+                System.out.println("Classificação: " + filme.getClassificacao());    //chamar o objeto dirtamente 
+            }
+            //Filme filme = (Filme) item; // NECESSARIO PARA NÃO GERAR UM ERRO DE COMPLICAÇÃO
+            //System.out.println("Classificação: " + filme.getClassificacao());    
         }
+        
+
+        // USANDO LAMBDA 1
+        /* 
+        lista.forEach(item -> {
+            System.out.println(item.getNome());
+            //System.out.println(item.getAnoDeLancamento());
+        });
+
+        */
+        // USANDO LAMBDA 2
+        // lista.forEach(item -> System.out.println(item.getNome()));
+
+        //USANDO Method Reference
+        //lista.forEach(System.out::println);
+
 
 
     }
