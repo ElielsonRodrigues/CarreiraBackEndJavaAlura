@@ -2,6 +2,7 @@ package br.com.alura.screenmatch;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 import br.com.alura.screenmatch.modelos.Filme;
 import br.com.alura.screenmatch.modelos.Serie;
@@ -72,14 +73,11 @@ public class Lista {
         Collections.sort(lista);
         System.out.println("Lista Titulos Ordenada: " + lista);
 
-        /* 
-        Filme filme1 = new Filme("Avatar", 2009);
-        Filme filme2 = new Filme("Avatar", 2009);
-        if (filme1 == filme2) {
-            System.out.println("Iguais");
-        } else {
-            System.out.println("Diferentes");
-        }
-        */
+
+        //ORDENANDO POR ANO
+        lista.sort(Comparator.comparing(Titulo::getAnoDeLancamento));
+        System.out.println("Ordenando por Ano: " + lista);
+
+       
     }
 }

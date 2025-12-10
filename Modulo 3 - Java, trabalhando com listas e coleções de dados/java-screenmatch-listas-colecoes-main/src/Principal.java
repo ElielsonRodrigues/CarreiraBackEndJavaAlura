@@ -56,9 +56,9 @@ public class Principal {
 
 
         var filmeDoPaulo = new Filme("Dogville",2023);
-        //filmeDoPaulo.setNome("Dogville");
-        //filmeDoPaulo.setAnoDeLancamento(2003);
+        filmeDoPaulo.setNome("Dogville");
         filmeDoPaulo.setDuracaoEmMinutos(200);
+        
         filmeDoPaulo.avalia(10);
 
         ArrayList<Filme> listaDeFilmes = new ArrayList<>();

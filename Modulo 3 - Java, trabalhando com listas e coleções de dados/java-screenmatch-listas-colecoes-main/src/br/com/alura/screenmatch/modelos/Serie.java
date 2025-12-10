@@ -48,7 +48,7 @@ public class Serie extends Titulo {
         return temporadas * episodiosPorTemporada * minutosPorEpisodio;
     }
 
-    @Override
+    @Override 
     public String toString() {
         return "Filme: " + this.getNome() + " (" + this.getAnoDeLancamento() + ")";
     }
