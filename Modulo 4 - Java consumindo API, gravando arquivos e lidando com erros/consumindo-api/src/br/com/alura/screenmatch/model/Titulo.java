@@ -2,6 +2,7 @@ package br.com.alura.screenmatch.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import br.com.alura.screenmatch.exception.ErroConversaoAno;
 import br.com.alura.screenmatch.record.TituloOmdbRecord;
 
 public class Titulo implements Comparable<Titulo> {
@@ -23,6 +24,11 @@ public class Titulo implements Comparable<Titulo> {
     
     public Titulo(TituloOmdbRecord tituloOmdbRecord) {
         this.nome = tituloOmdbRecord.title();
+
+        if (tituloOmdbRecord.year().length() > 4) {
+            throw new ErroConversaoAno("Não possivel converter ano tem mas que 04 caracteres");
+        }
+
         this.anoDeLancamento = Integer.valueOf(tituloOmdbRecord.year());
         this.duracaoEmMinutos = Integer.valueOf(tituloOmdbRecord.runtime().substring(0, 2));
     }

@@ -8,6 +8,7 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import br.com.alura.screenmatch.exception.ErroConversaoAno;
 import br.com.alura.screenmatch.model.Titulo;
 import br.com.alura.screenmatch.record.TituloOmdbRecord;
 
@@ -63,6 +64,8 @@ public class App {
             System.out.println("Acontece um erro: " + e.getMessage());
         } catch (IllegalArgumentException e) {
                 System.out.println("Algum erro de argumento na busca, verifique o endereço");
+        } catch (ErroConversaoAno erroConversaoAno){
+            System.out.println(erroConversaoAno.getMessage());
         }
         System.out.println("O programa finalizou corretamente!");
 
