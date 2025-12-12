@@ -55,16 +55,33 @@ public class App {
         TituloOmdbRecord tituloOmdbRecord = gsonBuild.fromJson(json, TituloOmdbRecord.class);
         System.out.println(tituloOmdbRecord);
 
-        Titulo t = new Titulo(tituloOmdbRecord);
-        System.out.println("Titulo Convertido: " + t);
+        //utilizando tratamento de execções
+        try {
+            Titulo t = new Titulo(tituloOmdbRecord);
+            System.out.println("Titulo Convertido: " + t);
+        } catch (NumberFormatException e) {
+            System.out.println("Acontece um erro: " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+                System.out.println("Algum erro de argumento na busca, verifique o endereço");
+        }
+        System.out.println("O programa finalizou corretamente!");
+
+        /*
+            A partir do Java 7, a linguagem introduziu uma nova 
+            funcionalidade chamada "multi-catch", que permite capturar
+            várias exceções em um único bloco catch.
+            Essa funcionalidade pode tornar o código mais conciso e
+            legível, reduzindo a repetição de código.
+        */
+
+        /* Exemplo usando mult-catch */
+        /* 
+        try {
+            metodoQuePodeLancarExcecao();
+        } catch (NullPointerException | IllegalArgumentException e) {
+            System.out.println("tratando erro...");
+        }
+        */
         
-
-          
-
-
-        
-
-        
-
     }
 }
