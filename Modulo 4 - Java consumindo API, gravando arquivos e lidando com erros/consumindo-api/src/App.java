@@ -3,6 +3,8 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import com.google.gson.FieldNamingPolicy;
@@ -15,73 +17,96 @@ import br.com.alura.screenmatch.record.TituloOmdbRecord;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        
 
-        try {
-            Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
+        List<Titulo> list = new ArrayList<>();
+        var busca = "";
+
+        Gson gsonBuild = new GsonBuilder()
+                            .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
+                            .setPrettyPrinting() // formata o json
+                            .create();
+
+        while (!busca.equalsIgnoreCase("sair")) {
+            
             System.err.println("Informe o nome do filme:");
-            var nomefilme = sc.nextLine();
+            busca = sc.nextLine();
+
+            if (busca.equalsIgnoreCase("sair")) {
+                break;
+            }
 
             String chave = "5a10db1c";
-            String url = "http://www.omdbapi.com/?t="+ nomefilme + "&apikey="+chave;
+            String url = "http://www.omdbapi.com/?t="+ busca.replace(" ", "+") + "&apikey="+chave;
 
-            HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .build();
+            try {
+                HttpClient client = HttpClient.newHttpClient();
+                HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .build();
 
-            HttpResponse<String> response = client
-                .send(request, HttpResponse.BodyHandlers.ofString());
+                HttpResponse<String> response = client
+                    .send(request, HttpResponse.BodyHandlers.ofString());
 
-            String json = response.body();
-            //System.out.println(json);
+                String json = response.body();
+                //System.out.println(json);
 
-            Gson gson = new Gson();
+                Gson gson = new Gson();
 
-            // Aplicando a converson utilizando a instancia do gson
-            Titulo titulo = gson.fromJson(json,Titulo.class);
-            //System.out.println(titulo.getNome());
-            
-            /*
-                Atenção! Por conta a serialização do json vim 'name' e minha classe
-                titulo o atributo ser 'nome' e retornado nome porque o gson não consegue
-                fazer a descerialização;
-                Para que se obtenha sucesso e necessario anotar os atributos com a classe
-                @SerializedName("Title"), porem em caso de consumo de apis de diferentes serviços
-                e levando em consideração boas preaticas necessario criar uma record(oficialmente no Java 16, mas disponível desde o Java 14)
-                como podemos ver abaixo
-            */
-            Gson gsonBuild = new GsonBuilder()
-                            .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
-                            .create();
-            
-            TituloOmdbRecord tituloOmdbRecord = gsonBuild.fromJson(json, TituloOmdbRecord.class);
-            System.out.println(tituloOmdbRecord);
+                // Aplicando a converson utilizando a instancia do gson
+                Titulo titulo = gson.fromJson(json,Titulo.class);
+                //System.out.println(titulo.getNome());
+                
+                /*
+                    Atenção! Por conta a serialização do json vim 'name' e minha classe
+                    titulo o atributo ser 'nome' e retornado nome porque o gson não consegue
+                    fazer a descerialização;
+                    Para que se obtenha sucesso e necessario anotar os atributos com a classe
+                    @SerializedName("Title"), porem em caso de consumo de apis de diferentes serviços
+                    e levando em consideração boas preaticas necessario criar uma record(oficialmente no Java 16, mas disponível desde o Java 14)
+                    como podemos ver abaixo
+                */
+                              
+                TituloOmdbRecord tituloOmdbRecord = gsonBuild.fromJson(json, TituloOmdbRecord.class);
+                System.out.println(tituloOmdbRecord);
+                
+                Titulo t = new Titulo(tituloOmdbRecord);
+                System.out.println("Titulo Convertido: " + t);
 
-            
-            
-            Titulo t = new Titulo(tituloOmdbRecord);
-            System.out.println("Titulo Convertido: " + t);
+                /* 
+                    //Classe do java para escrever dados em um arquivo!
+                    FileWriter escrevendo = new FileWriter("filmes.txt");
+                    
+                    //escrevendo 'Titulo no arquivo'
+                    escrevendo.write(titulo.toString());
 
+                    //encerrando buffer
+                    escrevendo.close();
+                */
 
-            //Classe do java para escrever dados em um arquivo!
-            FileWriter escrevendo = new FileWriter("filmes.txt");
-            
-            //escrevendo 'Titulo no arquivo'
-            escrevendo.write(titulo.toString());
+                list.add(t);
+                
 
-            //encerrando buffer
-            escrevendo.close();
-
-
-        //utilizando tratamento de execções
-        } catch (NumberFormatException e) {
-            System.out.println("Acontece um erro: " + e.getMessage());
-        } catch (IllegalArgumentException e) {
-                System.out.println("Algum erro de argumento na busca, verifique o endereço");
-        } catch (ErroConversaoAno erroConversaoAno){
-            System.out.println(erroConversaoAno.getMessage());
+            //utilizando tratamento de execções
+            } catch (NumberFormatException e) {
+                System.out.println("Acontece um erro: " + e.getMessage());
+            } catch (IllegalArgumentException e) {
+                    System.out.println("Algum erro de argumento na busca, verifique o endereço");
+            } catch (ErroConversaoAno erroConversaoAno){
+                System.out.println(erroConversaoAno.getMessage());
+            }
         }
+
+        // imprimindo a lista
+        System.out.println(list);
+
+        FileWriter escrita = new FileWriter("filmes.txt");
+        //pega o que esta na lista descerializa e escreve no txt
+        escrita.write(gsonBuild.toJson(list));
+
+        // fecha o arquivo
+        escrita.close();
+
         System.out.println("O programa finalizou corretamente!");
 
         /*
@@ -100,6 +125,5 @@ public class App {
             System.out.println("tratando erro...");
         }
         */
-        
     }
 }
