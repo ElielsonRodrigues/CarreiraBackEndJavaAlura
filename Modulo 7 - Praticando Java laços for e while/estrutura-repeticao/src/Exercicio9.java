@@ -1,59 +1,46 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Exercicio9 {
 
     /*
-     * Maria trabalha em um banco de sangue e precisa verificar se um doador é
-     * compatível para doar sangue. Para ser compatível, o doador deve atender aos
-     * seguintes critérios:
+     * Gustavo está desenvolvendo um jogo educativo de matemática e deseja um
+     * sistema que exiba os números de 1 até um valor definido pelo usuário,
+     * ignorando aqueles que terminam em 5. Essa mecânica tem o objetivo de tornar o
+     * jogo mais desafiador e imprevisível.
      * 
-     * Ter entre 18 e 65 anos.
+     * Com base nesse cenário, crie um programa que conte de 1 até um número
+     * digitado pelo usuário, mas ignore números terminados em 5.
      * 
-     * Pesar mais de 50 kg.
-     * 
-     * Ela deseja um programa que receba a idade e o peso do doador e informe se ele
-     * é compatível para doar sangue. Se não for, o programa deve indicar qual
-     * critério não foi atendido.
-     * 
-     * Como você criaria um programa que receba a idade e o peso do doador e exiba
-     * uma mensagem indicando se ele é compatível ou não, além de informar o
-     * critério não atendido, se for o caso?
+     * Dica: Para saber se um número termina em 5, sempre dividimos ele por 10 e
+     * verificamos o resto da divisão. Se o resto for 5, significa que o número
+     * termina em 5.
      * 
      * Exemplo de entrada:
      * 
-     * Digite a idade do doador: 17
-     * Digite o peso do doador (em kg): 55
+     * Digite um número: 20
      * 
      * Saída esperada:
-     * 
-     * O doador não é compatível.
-     * Motivo: Deve ter entre 18 e 65 anos.
-     * 
+     * 1 2 3 4 6 7 8 9 10 11 12 13 14 16 17 18 19 20
      */
     public static void main(String[] args) {
 
+        List<Integer> ltNumeros = new ArrayList<>();
+
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Digite a idade do doador: ");
-        int idadeDoador = sc.nextInt();
+        int numero = 1;
 
-        System.out.println("Digite o peso do doador(em kg): ");
-        double pesoDoador = sc.nextDouble();
-
-        if (!(idadeDoador >= 18) && !(idadeDoador <= 65) && !(pesoDoador >= 50)) {
-            System.out.println("O doador não é compatível.");
-            if (!(idadeDoador >= 18) && !(idadeDoador <= 65)) {
-                System.out.println("Motivo: Deve ter entre 18 e 65 anos.");
+        while (numero != 0) {
+            System.out.println("Digite um número (para sair digite 0):");
+            numero = sc.nextInt();
+            if (!((numero % 10) == 5)) {
+                ltNumeros.add(numero);
             }
-            if (pesoDoador >= 50) {
-                System.out.println("Motivo: Deve pesar mas que 50 kg.");
-            }
-
-        } else {
-            System.out.println("O doador é compatível.");
         }
-
         sc.close();
+        System.out.println(ltNumeros);
 
     }
 

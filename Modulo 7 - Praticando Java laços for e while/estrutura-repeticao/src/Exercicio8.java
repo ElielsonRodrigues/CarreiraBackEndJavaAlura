@@ -1,49 +1,57 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Exercicio8 {
     /*
-     * Marcos está estudando geometria e precisa verificar se três lados podem
-     * formar um triângulo. Para que três lados formem um triângulo, a soma de dois
-     * lados deve ser maior que o terceiro lado. Ele quer um programa que receba
-     * três lados e exiba uma mensagem informando se os lados podem formar um
-     * triângulo ou não.
+     * Ana é professora de matemática e está sempre curiosa sobre as respostas de
+     * seus alunos. Hoje, ela propôs um exercício no qual os alunos devem contar
+     * quantos números positivos e negativos existem em uma sequência de números
+     * fornecida por ela.
      * 
-     * Com base nesse cenário, crie um programa que receba três lados e exiba uma
-     * mensagem informando se os lados podem formar um triângulo ou não.
+     * Ela quer que os alunos criem um programa que permita **inserir vários
+     * números, um por vez, e que pare quando o número "fim" for digitado. **
      * 
      * Exemplo de entrada:
      * 
-     * Digite o primeiro lado: 3
-     * Digite o segundo lado: 4
-     * Digite o terceiro lado: 5
+     * Digite um número (ou 'fim' para encerrar): 3
+     * Digite um número (ou 'fim' para encerrar): -1
+     * Digite um número (ou 'fim' para encerrar): 7
+     * Digite um número (ou 'fim' para encerrar): fim
      * 
      * Saída esperada:
-     * Os lados podem formar um triângulo.
+     * 
+     * Números positivos: 2
+     * Números negativos: 1
      */
 
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        List<Integer> negativos = new ArrayList<>();
+        List<Integer> positivos = new ArrayList<>();
+        String entrada = "";
 
-        System.out.println("Informe lado 1");
-        int l1 = sc.nextInt();
+        while (!entrada.equals("fim")) {
+            System.out.println("Digite um número (ou 'fim' para encerrar):");
+            entrada = sc.nextLine();
+            if (entrada.equals("fim")) {
+                break;
+            } else {
+                int numero = Integer.parseInt(entrada);
 
-        System.out.println("Informe lado 2");
-        int l2 = sc.nextInt();
+                if (numero < 0) {
+                    negativos.add(numero);
+                    System.out.println(negativos);
+                } else {
+                    positivos.add(numero);
+                    System.out.println(positivos);
+                }
+            }
 
-        System.out.println("Informe lado 3");
-        int l3 = sc.nextInt();
-
-        if ((l1 + l2) > l3 &&
-                (l2 + l3) > l1 &&
-                (l3 + l1) > l2) {
-
-            System.out.println("Os lados podem formar um triângulo. ");
-
-        } else {
-            System.out.println("Não pode ser trinangulos");
         }
-
+        System.out.println("Números positivos:" + positivos.size());
+        System.out.println("Números negativos:" + negativos.size());
         sc.close();
 
     }
