@@ -1,3 +1,7 @@
+import java.time.Duration;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 public class Exercicio10 {
 
@@ -56,6 +60,48 @@ public class Exercicio10 {
      * Saldo de horas: -0h 30min
      */
     public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        System.out.print("Digite o horário de entrada (HH:mm): ");
+        LocalTime entrada = LocalTime.parse(sc.next(), formatter);
+
+        System.out.print("Digite a carga horária diária (em horas): ");
+        int ch = sc.nextInt();
+
+        System.out.print("Digite o horário de saída (HH:mm): ");
+        LocalTime saida = LocalTime.parse(sc.next(), formatter);
+
+        // Cálculo da saída prevista
+        LocalTime saidaPrevista = entrada.plusHours(ch);
+
+        Duration diferenca = Duration.between(saidaPrevista, saida);
+
+        long horasExtras = diferenca.toHours();
+        long minutosExtras = diferenca.toMinutesPart();
+
+        sc.close();
+
+        System.out.println("Horário de entrada: " + entrada);
+        System.out.println("Horário de saída previsto: " + saidaPrevista);
+        System.out.println("Horário real de saída: " + saida);
+
+        if (horasExtras == 0 && minutosExtras == 0) {
+            System.out.println("Saldo de horas: 0h 0min");
+        } else {
+            String sinal;
+            if (horasExtras > 0 || minutosExtras > 0) {
+                sinal = "+";
+            } else {
+                sinal = "-";
+            }
+            System.out.println(
+                    "Saldo de horas: " + sinal +
+                            Math.abs(horasExtras) + "h " +
+                            Math.abs(minutosExtras) + "min");
+        }
 
     }
 
