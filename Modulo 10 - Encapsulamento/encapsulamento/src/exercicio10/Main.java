@@ -1,50 +1,48 @@
 package exercicio10;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import exercicio10.model.Produto;
-import exercicio10.model.Carrinho;
+import exercicio10.model.Disciplina;
 
 public class Main {
     public static void main(String[] args) throws Exception {
         /*
-         * Você está desenvolvendo o sistema de checkout de um e-commerce de produtos
-         * eletrônicos. Seu desafio é calcular o valor total do carrinho de compras,
-         * considerando que cada produto pode ter quantidades diferentes e preços
-         * variados.
+         * Você está desenvolvendo um módulo acadêmico para registrar o desempenho dos
+         * alunos em cada disciplina. O sistema precisa ser flexível para receber
+         * diferentes quantidades de notas, mas deve garantir que todas estejam dentro
+         * do intervalo válido.
          * 
          * Crie um programa que:
          * 
-         * Defina uma classe com os atributos nome, preço e quantidade.
-         * Implemente um método que retorne o valor total do item (preço x quantidade).
-         * Crie uma lista de item e calcule o valor total da compra.
+         * Defina uma classe que armazene o nome da disciplina e a lista das notas dos
+         * alunos
+         * Valide se cada nota está entre 0 e 10
+         * Calcule a média apenas das notas válidas
+         * Informe quantas notas foram registradas com sucesso e quantas foram ignoradas
          * 
-         * Exemplo de entrada:
+         * Exemplo de entrada:.
          * 
-         * i1.nome = "Teclado";
-         * i1.preco = 120.0;
-         * i1.quantidade = 1;
-         * 
-         * i2.nome = "Mouse";
-         * i2.preco = 60.0;
-         * i2.quantidade = 2;
+         * Disciplina matematica = new Disciplina("Matemática");
+         * matematica.adicionarNota(7.5);
+         * matematica.adicionarNota(11.0);
+         * matematica.adicionarNota(8.0);
+         * matematica.adicionarNota(-3.0);
+         * matematica.adicionarNota(9.5);
          * 
          * Saída esperada:
-         * Total da compra: R$ 240.00
+         * 
+         * Nota inválida ignorada: 11.0
+         * Nota inválida ignorada: -3.0
+         * Total de notas válidas: 3
+         * Média em Matemática: 8,33
+         * 
          */
+        Disciplina matematica = new Disciplina("Matemática");
+        matematica.adicionarNota(7.5);
+        matematica.adicionarNota(11.0);
+        matematica.adicionarNota(8.0);
+        matematica.adicionarNota(-3.0);
+        matematica.adicionarNota(9.5);
 
-        Produto p1 = new Produto("Teclado", 120.0, 1);
-        Produto p2 = new Produto("Mouse", 60.0, 2);
-        Produto p3 = new Produto("Monitor", 10.0, 10);
-
-        List<Produto> itens = new ArrayList<>();
-        itens.add(p1);
-        itens.add(p2);
-        itens.add(p3);
-
-        Carrinho compra = new Carrinho(itens);
-        compra.totalCompra();
+        matematica.calcularMedia();
 
     }
 }
