@@ -1,65 +1,41 @@
 package exercicio8;
 
-import java.util.Scanner;
-
-import exercicio8.model.Usuario;
+import exercicio8.model.Relatorio;
 
 public class Main {
     public static void main(String[] args) throws Exception {
 
         /*
-         * Imagine que você está desenvolvendo um sistema de acesso para um laboratório
-         * de informática da escola. Os estudantes precisam autenticar-se com suas
-         * credenciais pessoais, mas o sistema deve proteger contra tentativas de
-         * adivinhação de senhas.
+         * Você está desenvolvendo um módulo de geração de documentos para um sistema
+         * corporativo. Esse módulo precisa oferecer uma forma de exibir diferentes
+         * tipos de relatórios, garantindo que todos sigam o mesmo padrão,
+         * independentemente de seu conteúdo específico.
          * 
-         * Crie uma classe que:
+         * Crie um programa que:
          * 
-         * Armazene o login e a senha de forma encapsulada.
-         * Um método validarSenha() que receba as credenciais digitadas e retorne se o
-         * login foi bem-sucedido.
-         * Uma lógica no arquivo principal que utilize a classe Scanner para ler o login
-         * e senha digitados, controlando as tentativas com um loop.
-         * Bloqueie o acesso após 3 falhas consecutivas.
-         * Exiba mensagens informando o resultado da tentativa e quantas restam.
+         * Defina uma interface Imprimivel com o método imprimir()
+         * Implemente uma classe Relatorio que siga este contrato
+         * Permita que o relatório seja criado com título e conteúdo
+         * Exiba as informações no console
          * 
          * Exemplo de entrada:
          * 
-         * Login: aluno2025
-         * Senha correta: escola@123
-         * Tentativas: "senhaerrada", "123456", "escola@123"
+         * Relatorio rel = new Relatorio(
+         * "Relatório 2025",
+         * "Tudo funcionando conforme esperado."
+         * );
+         * rel.imprimir();
          * 
          * Saída esperada:
          * 
-         * Senha incorreta. Tentativas restantes: 2
-         * Senha incorreta. Tentativas restantes: 1
-         * Login bem-sucedido!
-         * 
+         * Título: Relatório 2025
+         * Conteúdo: Tudo funcionando conforme esperado.
          */
 
-        Usuario aluno = new Usuario("aluno", "123456");
-
-        Scanner sc = new Scanner(System.in);
-
-        int tentativa = 3;
-
-        while (tentativa >= 1 && tentativa <= 3) {
-            System.out.println("Digite o usuario: ");
-            String inputLogin = sc.nextLine();
-
-            System.out.println("Digite a senha: ");
-            String inputSenha = sc.nextLine();
-
-            if (inputLogin.equals(aluno.getLogin()) &&
-                    inputSenha.equals(aluno.getSenha())) {
-                System.out.println("Login bem-sucedido!");
-                break;
-            } else {
-                tentativa--;
-                System.out.println("Senha incorreta. Tentativas restantes:" + tentativa);
-            }
-        }
-        sc.close();
+        Relatorio rel = new Relatorio(
+                "Relatório 2025",
+                "Tudo funcionando conforme esperado.");
+        rel.imprimir();
 
     }
 }

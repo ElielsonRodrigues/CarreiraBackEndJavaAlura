@@ -1,44 +1,57 @@
 package exercicio7;
 
-import exercicio7.model.Filme;
+import java.time.LocalDate;
+
+import exercicio7.model.Reserva;
+import exercicio7.model.Vip;
 
 public class Main {
     public static void main(String[] args) throws Exception {
 
         /*
-         * Você está desenvolvendo um sistema para uma plataforma de streaming que
-         * deseja oferecer recomendações mais precisas aos usuários. Para isso, é
-         * importante coletar avaliações confiáveis e calcular médias que reflitam a
-         * qualidade real dos filmes.
+         * Imagine que você está desenvolvendo um sistema de gerenciamento para um
+         * sistema de entretenimento que oferece diversos serviços, desde restaurantes
+         * até áreas de lazer. O sistema precisa lidar com diferentes tipos de reservas,
+         * atendendo desde clientes casuais até os que possuem benefícios exclusivos.
          * 
-         * Crie uma classe que:
+         * Crie um programa que:
          * 
-         * Armazene o título do filme e suas avaliações. As avaliações são armazenadas
-         * em uma lista
-         * Permita adicionar novas avaliações (apenas entre 1 e 5)
-         * Calcule e exiba a média das avaliações com precisão decimal
+         * Tenha uma classe Reserva com três versões sobrecarregadas do método
+         * reservar():
+         * Uma sem parâmetros, que imprime: "Reserva realizada"
+         * Uma com data como parâmetro, que imprime: "Reserva feita para o dia [data]"
+         * Uma com data e quantidade de pessoas, que imprime:
+         * "Reserva feita para o dia [data] para [X] pessoas"
+         * Tenha uma subclasse ReservaVip, que herda de Reserva e sobrescreve o método
+         * reservar() sem parâmetros, imprimindo uma mensagem exclusiva:
+         * "Reserva VIP confirmada com atendimento exclusivo"
          * 
          * Exemplo de entrada:
-         * Filme matrix = new Filme("Matrix");
-         * matrix.adicionarAvaliacao(5);
-         * matrix.adicionarAvaliacao(4);
-         * matrix.adicionarAvaliacao(5);
-         * matrix.adicionarAvaliacao(3);
-         * matrix.adicionarAvaliacao(4);
+         * 
+         * Reserva r = new Reserva();
+         * r.reservar();
+         * r.reservar("10/04");
+         * r.reservar("12/04", 4);
+         * 
+         * Reserva vip = new ReservaVip();
+         * vip.reservar();
          * 
          * Saída esperada:
-         * Média de avaliações para Matrix: 4,20
+         * 
+         * Reserva realizada
+         * Reserva feita para o dia 10/04
+         * Reserva feita para o dia 12/04 para 4 pessoas
+         * Reserva VIP confirmada com atendimento exclusivo
+         * 
          */
 
-        Filme matrix = new Filme("Matrix");
+        Reserva r = new Reserva();
 
-        matrix.adicionarAvaliacao(5);
-        matrix.adicionarAvaliacao(4);
-        matrix.adicionarAvaliacao(5);
-        matrix.adicionarAvaliacao(3);
-        matrix.adicionarAvaliacao(4);
+        r.reservar();
+        r.reservar(LocalDate.now());
+        r.reservar(LocalDate.now(), 4);
 
-        matrix.calcularMediaAvaliacoes();
+        new Vip().reservar();
 
     }
 }

@@ -1,7 +1,12 @@
 package exercicio5;
 
+import exercicio5.model.BoletoBancario;
+import exercicio5.model.CartaoCredito;
+import exercicio5.model.Pagamento;
+import exercicio5.model.Pix;
+
 public class Main {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
         /*
          * Você está desenvolvendo o núcleo de processamento para uma fintech. A startup
@@ -35,8 +40,15 @@ public class Main {
          * Pagamento de R$250,00 confirmado no Cartão de Crédito (Taxa: R$7,50)
          * Boleto de R$500,00 gerado com sucesso (Taxa: R$5,00)
          * Pagamento via Pix de R$300,00 confirmado
-         * 
          */
+
+        Pagamento cartao = new CartaoCredito(250.00);
+        Pagamento boleto = new BoletoBancario(500.00);
+        Pagamento pix = new Pix(300.00);
+
+        cartao.confirmarPagamento();
+        boleto.confirmarPagamento();
+        pix.confirmarPagamento();
 
     }
 }

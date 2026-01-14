@@ -1,41 +1,43 @@
 package exercicio6;
 
-import exercicio6.model.Conta;
+import exercicio6.model.Notificacao;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
         /*
-         * Você está desenvolvendo um sistema para um banco digital. Os clientes
-         * precisam confiar que suas transações serão seguras e que o sistema nunca
-         * permitirá que eles gastem mais do que possuem em conta. Seu desafio é
-         * garantir essa segurança nas operações financeiras de depositar e sacar.
          * 
-         * Crie uma classe que:
+         * Você está desenvolvendo um sistema de comunicação para uma plataforma de
+         * colaboração em equipe. Esse sistema precisa lidar com diferentes cenários de
+         * envio de mensagens.
          * 
-         * Permita criar contas com titular e saldo inicial.
-         * Realize depósitos com valores positivos.
-         * Autorize saques apenas quando houver saldo suficiente.
-         * Exiba o saldo atualizado após cada operação.
+         * Crie um programa que utilize sobrecarga de métodos para implementar as
+         * seguintes variações:
+         * 
+         * Enviar uma mensagem padrão para todos os contatos, como Olá!.
+         * Enviar uma mensagem personalizada para um contato específico, como Bom dia
+         * para João.
+         * Reforçar uma mensagem enviando-a mais de uma vez para o mesmo contato, como:
+         * "Atenção!" para Maria, enviada duas vezes.
          * 
          * Exemplo de entrada:
-         * Conta conta = new Conta("Ana");
-         * conta.depositar(1000.00);
-         * conta.sacar(1200.00);
-         * conta.exibirSaldo();
+         * 
+         * notificacao.enviarMensagem("Olá!");
+         * notificacao.enviarMensagem("João", "Bom dia!");
+         * notificacao.enviarMensagem("Maria", "Atenção!", 2);
          * 
          * Saída esperada:
-         * Saldo insuficiente para saque.
-         * Saldo atual de Ana: 1000,00
          * 
-         * Ou, caso Ana deposite 1000,00 e saque 200,00 a mensagem será:
-         * Saldo atual de Ana: 800,00
+         * Mensagem enviada para todos: Olá!
+         * Mensagem para João: Bom dia!
+         * Mensagem para Maria: Atenção!
+         * Mensagem para Maria: Atenção!
          */
 
-        Conta conta = new Conta("Ana");
+        Notificacao notificacao = new Notificacao();
 
-        conta.depositar(1000.00);
-        conta.sacar(1200.00);
-        // conta.exibirSaldo();
+        notificacao.enviarMensagem("Olá");
+        notificacao.enviarMensagem("João", "Bom dia!");
+        notificacao.enviarMensagem("Maria", "Atenção!", 2);
     }
 }

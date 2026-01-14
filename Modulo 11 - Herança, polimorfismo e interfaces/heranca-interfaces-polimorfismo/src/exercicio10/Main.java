@@ -1,48 +1,66 @@
 package exercicio10;
 
-import exercicio10.model.Disciplina;
+import exercicio10.model.ArCondicionado;
+import exercicio10.model.Luz;
 
 public class Main {
     public static void main(String[] args) throws Exception {
+
         /*
-         * Você está desenvolvendo um módulo acadêmico para registrar o desempenho dos
-         * alunos em cada disciplina. O sistema precisa ser flexível para receber
-         * diferentes quantidades de notas, mas deve garantir que todas estejam dentro
-         * do intervalo válido.
+         * Você está desenvolvendo um sistema de automação residencial para controlar
+         * dispositivos eletrônicos, como luzes e ar-condicionado. O sistema precisa
+         * garantir que, ao acionar os comandos de ligar ou desligar, o usuário receba
+         * uma mensagem, informando se a ação foi realmente executada ou se o
+         * dispositivo já estava no estado desejado.
+         * 
+         * Todos os dispositivos devem seguir a mesma estrutura de controle: devem poder
+         * ser ligados e desligados, e devem manter internamente um estado (ligado ou
+         * desligado) para evitar ações desnecessárias.
          * 
          * Crie um programa que:
          * 
-         * Defina uma classe que armazene o nome da disciplina e a lista das notas dos
-         * alunos
-         * Valide se cada nota está entre 0 e 10
-         * Calcule a média apenas das notas válidas
-         * Informe quantas notas foram registradas com sucesso e quantas foram ignoradas
+         * Defina uma interface Controlavel com dois métodos:
+         * ligar()
+         * desligar()
+         * Tenha duas classes: Luz e ArCondicionado, que implementam essa interface.
+         * Cada classe deve conter um atributo booleano ligado, iniciado como false, que
+         * representa o estado atual do dispositivo.
+         * Ao chamar os métodos:
+         * Se o dispositivo estiver desligado e o método ligar() for chamado, ele deve
+         * mudar o estado para ligado e exibir a mensagem: "Luz ligada." ou
+         * "Ar-condicionado ligado."
+         * Se já estiver ligado, e ligar() for chamado novamente, exibir:
+         * "Luz já está ligada." ou "Ar-condicionado já está ligado."
+         * O mesmo vale para o método desligar(), com as mensagens correspondentes.
          * 
-         * Exemplo de entrada:.
+         * Exemplo de entrada:
          * 
-         * Disciplina matematica = new Disciplina("Matemática");
-         * matematica.adicionarNota(7.5);
-         * matematica.adicionarNota(11.0);
-         * matematica.adicionarNota(8.0);
-         * matematica.adicionarNota(-3.0);
-         * matematica.adicionarNota(9.5);
+         * Luz luz = new Luz();
+         * ArCondicionado ar = new ArCondicionado();
+         * 
+         * luz.ligar();
+         * luz.ligar();
+         * luz.desligar();
+         * 
+         * ar.desligar();
          * 
          * Saída esperada:
          * 
-         * Nota inválida ignorada: 11.0
-         * Nota inválida ignorada: -3.0
-         * Total de notas válidas: 3
-         * Média em Matemática: 8,33
+         * Luz ligada.
+         * Luz já está ligada.
+         * Luz desligada.
+         * Ar-condicionado já está desligado.
          * 
          */
-        Disciplina matematica = new Disciplina("Matemática");
-        matematica.adicionarNota(7.5);
-        matematica.adicionarNota(11.0);
-        matematica.adicionarNota(8.0);
-        matematica.adicionarNota(-3.0);
-        matematica.adicionarNota(9.5);
 
-        matematica.calcularMedia();
+        Luz luz = new Luz();
+        ArCondicionado ar = new ArCondicionado();
+
+        luz.ligar();
+        luz.ligar();
+        luz.desligar();
+
+        ar.desligar();
 
     }
 }

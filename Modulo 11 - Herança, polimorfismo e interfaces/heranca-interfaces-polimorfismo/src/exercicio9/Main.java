@@ -1,46 +1,50 @@
 package exercicio9;
 
-import exercicio9.model.Aluno;
+import exercicio9.model.Deposito;
+import exercicio9.model.OperacaoBancaria;
+import exercicio9.model.Saque;
 
 public class Main {
     public static void main(String[] args) throws Exception {
 
         /*
-         * Imagine que você está desenvolvendo um sistema de pontuação para uma
-         * plataforma de estudos. Cada aluno ganha pontos conforme participa de
-         * atividades como assistir aulas, responder quizzes ou completar tarefas. Seu
-         * objetivo é criar uma classe que gerencie essa pontuação e determine o nível
-         * atual do aluno com base na quantidade total de pontos acumulados.
+         * Imagine que você está desenvolvendo um sistema para um banco digital, onde
+         * todas as operações financeiras precisam ser tratadas de forma uniforme, mas
+         * cada uma com seu comportamento específico. O banco deseja que,
+         * independentemente do tipo de operação (depósito, saque, etc.), todas sigam a
+         * mesma estrutura básica para facilitar a manutenção e expansão do sistema.
          * 
-         * Crie uma classe que:
+         * Crie um programa que:
          * 
-         * Armazene os atributos nome, pontos e nível.
-         * Implemente um método ganharPontos() para adicionar pontos ao aluno.
-         * O nível do aluno deve subir conforme a pontuação total:
-         * Nivel 1: 0 a 99 pontos
-         * Nível 2: 100 a 199 pontos
-         * Nível 3: 200 a 299 pontos
-         * E assim por diante (a cada 100 pontos, sobe de nível)
-         * Implemente um método exibirStatus() que mostre o nome, pontos e nível atual.
+         * Tenha uma interface AcaoBancaria com o método executar(), que representa o
+         * contrato que toda operação bancária deve seguir.
+         * Tenha uma classe abstrata OperacaoBancaria, que implementa essa interface e
+         * contém:
+         * O atributo valor
+         * Um construtor para inicializar esse valor
+         * Tenha duas subclasses** que estendem OperacaoBancaria:
+         * Deposito: deve imprimir "Depósito de R$[valor] realizado"
+         * Saque: deve imprimir "Saque de R$[valor] realizado"
          * 
          * Exemplo de entrada:
          * 
-         * Aluno aluno = new Aluno("Fernanda");
+         * OperacaoBancaria deposito = new Deposito(200.0);
+         * OperacaoBancaria saque = new Saque(50.5);
          * 
-         * aluno.ganharPontos(120);
-         * aluno.exibirStatus();
+         * deposito.executar();
+         * saque.executar();
          * 
          * Saída esperada:
          * 
-         * Nome: Fernanda
-         * Pontos: 120
-         * Nível: 2
+         * Depósito de R$200,00 realizado
+         * Saque de R$50,50 realizado
          */
 
-        Aluno aluno = new Aluno("Fernanda");
+        OperacaoBancaria deposito = new Deposito(200.0);
+        OperacaoBancaria saque = new Saque(50.5);
 
-        aluno.ganharPontos(120);
-        aluno.ganharPontos(10);
-        aluno.exibirStatus();
+        deposito.executar();
+        saque.executar();
+
     }
 }
