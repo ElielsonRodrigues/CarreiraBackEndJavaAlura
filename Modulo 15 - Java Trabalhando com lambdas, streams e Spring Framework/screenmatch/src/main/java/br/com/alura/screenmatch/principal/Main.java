@@ -89,13 +89,18 @@ public class Main {
 		juntaEpisodiosTodasTemporadas
 			.stream()
 			.filter(e -> !e.avaliacao().equalsIgnoreCase("N/A")) // FILTRANDO OS EPISODIOS QUE NÃO TEM AVALIAÇÃO
+			.peek(e-> System.out.println("Primeiro Filtro (N/A) " + e)) // DEBUGANDO FILTRO
 			.sorted(Comparator.comparing(Episodios::avaliacao).reversed()) // COMPARANDO O EPISODIO POR AVALIAÇÃO MAIOR NOTA PARA MENOR
+			.peek(e-> System.out.println("Ordenação " + e))  // DEBUGANDO COMO E REALIZADO A ORDRNAÇÃO DOS 5 PRIMEIROS
 			.limit(5) // FILTRANDO OS 5 PRIMEIROS
+			.peek(e-> System.out.println("Limitação " + e))  // DEBUGANDO COMO REALIZA A ORDENAÇÃO
+			.map(e-> e.titulo().toUpperCase())
+			.peek(e-> System.out.println("Mapeamento " + e)) //  // DEBUGANDO COMO E FEITO MAPEAMENTO PARA DEIXAR TITULO EM CAIXA ALTA
 			.forEach(System.out::println);
 		
 		//juntaEpisodiosTodasTemporadas.forEach(System.out::println);
 		
-		
+		/*
 		List<Episodio> episodios = temporadas
 					.stream()
 					.flatMap(t-> t.episodios() // JUNTANTOS TODOS OS EPISODIOS POR TEMPORADA
@@ -123,7 +128,7 @@ public class Main {
 					", Dt Lançamento: " + e.getLancamento().format(formtt)
 			));
 		
-		
+		*/
 		
 		
 	}
